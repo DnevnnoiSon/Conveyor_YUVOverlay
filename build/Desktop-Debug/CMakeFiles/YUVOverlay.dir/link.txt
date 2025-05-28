@@ -1,0 +1,1 @@
+/usr/bin/clang++-18 -DQT_QML_DEBUG -g -Xlinker --dependency-file=CMakeFiles/YUVOverlay.dir/link.d CMakeFiles/YUVOverlay.dir/YUVOverlay_autogen/mocs_compilation.cpp.o CMakeFiles/YUVOverlay.dir/main.cpp.o -o YUVOverlay  /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
