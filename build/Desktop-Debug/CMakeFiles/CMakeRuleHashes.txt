@@ -1,3 +1,0 @@
-# Hashes of file build rules.
-dc66d1b12354046723863acae1d86e5b CMakeFiles/YUVOverlay_autogen
-7483a85d2d50c966725a9faf41397064 YUVOverlay_autogen/timestamp

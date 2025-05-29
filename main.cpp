@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-
+/* Наложение изображения (BMP) на видео (YU420) */
 
 int main()
 {

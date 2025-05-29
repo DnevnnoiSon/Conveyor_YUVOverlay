@@ -14,6 +14,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 add_executable(YUVOverlay
   main.cpp
+  bmpreader.h bmpreader.cpp
 )
 target_link_libraries(YUVOverlay Qt${QT_VERSION_MAJOR}::Core)
 
