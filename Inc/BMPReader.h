@@ -7,16 +7,19 @@
 //============================//
 //  МОДУЛЬ ЧТЕНИЯ BMP ФАЙЛА   //
 //============================//
-using namespace std;
+
+#define  HEADER_SIZE  54
+
 class BMPReader
 {
 public:
+// Структурв выгруженных BMP данных.
     struct BMPImage {
         int width = 0;
         int height = 0;
-        vector<uint8_t> rgb_data;
+        std::vector<uint8_t> rgb_data;
     };
-    static BMPImage load(const std::string& filepath);
+    static BMPImage loadBMPImage(const std::string& filepath);
 };
 
 #endif // BMPREADER_H

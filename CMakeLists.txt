@@ -10,18 +10,18 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 # ========== Файловая структура проекта ==========
 set(SOURCES
     Src/main.cpp
     Src/BMPReader.cpp
     Src/YUVConverter.cpp
+    Src/YUVOverlay.cpp
 )
 
 set(HEADERS
     Inc/BMPReader.h
     Inc/YUVConverter.h
+    Inc/YUVOverlay.h
 )
 
 set(RESOURCES
@@ -37,6 +37,7 @@ endforeach()
 # Исполняемый файл:
 add_executable(YUVOverlay ${SOURCES} ${HEADERS})
 
+
 # Подключение заголовков:
 target_include_directories(YUVOverlay PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Inc
@@ -51,14 +52,13 @@ add_custom_command(TARGET YUVOverlay POST_BUILD
 )
 
 
-# Линковка с системными библиотеками
+# Линковка с системными библиотеками:
 find_package(Threads REQUIRED)
 target_link_libraries(YUVOverlay PRIVATE
-    Qt${QT_VERSION_MAJOR}::Core
     Threads::Threads
 )
 
-# Установка только RUNTIME для исполняемого файла
+# Установка только RUNTIME для исполняемого файла:
 include(GNUInstallDirs)
 install(TARGETS YUVOverlay
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

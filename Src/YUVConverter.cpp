@@ -22,13 +22,13 @@ namespace {
 }
 
 // Оптимальный способ конвертации:
-YUVConverter::YUVConverter(const BMPReader::BMPImage& bmp)
+YUVConverter::YUVImage YUVConverter::BMPConvert(const BMPReader::BMPImage& bmp)
 {
     int width = bmp.width;
     int height = bmp.height;
 
     if (width % 2 != 0 || height % 2 != 0) {
-        throw runtime_error("Ошибка размера изображения");
+        throw std::runtime_error("Ошибка размера изображения");
     }
 
     const int uv_width = width / 2;
@@ -36,16 +36,17 @@ YUVConverter::YUVConverter(const BMPReader::BMPImage& bmp)
     const int y_plane_size = width * height;
     const int uv_plane_size = uv_width * uv_height;
 
-    result.width = width;
-    result.height = height;
-    result.YUV.resize(y_plane_size + 2 * uv_plane_size);
+    YUVImage image;
+    image.width = width;
+    image.height = height;
+    image.YUV.resize(y_plane_size + 2 * uv_plane_size);
 // Формирование результирующего буфера через указатели:
-    uint8_t* Y_ptr = result.YUV.data();
+    uint8_t* Y_ptr = image.YUV.data();
     uint8_t* U_ptr = Y_ptr + y_plane_size;
     uint8_t* V_ptr = U_ptr + uv_plane_size;
 
-    vector<uint16_t> U_sum(uv_plane_size, 0);
-    vector<uint16_t> V_sum(uv_plane_size, 0);
+    std::vector<uint16_t> U_sum(uv_plane_size, 0);
+    std::vector<uint16_t> V_sum(uv_plane_size, 0);
 
     const uint8_t* rgb = bmp.rgb_data.data();
 
@@ -72,8 +73,7 @@ YUVConverter::YUVConverter(const BMPReader::BMPImage& bmp)
         U_ptr[i] = (U_sum[i] + 2) / 4;
         V_ptr[i] = (V_sum[i] + 2) / 4;
     }
+    return image;
 }
 
-const YUVConverter::YUVImage& YUVConverter::getResult() const {
-    return result;
-}
+

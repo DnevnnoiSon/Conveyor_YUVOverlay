@@ -6,20 +6,15 @@
 
 #include"BMPReader.h"
 
-using namespace std;
 
 class YUVConverter {
 public:
-    YUVConverter(const BMPReader::BMPImage& bmp);
+// Структурв сконвертированных YUV данных.
     struct YUVImage {
         int width;
         int height;
-        vector<uint8_t> YUV; //помещение последовательно: Y-U-V
+        std::vector<uint8_t> YUV; //помещение последовательно: Y-U-V
     };
-// Получение результата:
-    const YUVImage& getResult() const;
-private:
-// Результат: Сконвертированные данные:
-    YUVImage result;
+    static YUVImage BMPConvert(const BMPReader::BMPImage& bmp);
 };
 #endif // YUVCONVERTER_H

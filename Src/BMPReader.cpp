@@ -7,17 +7,17 @@
 #define HEADER_SIZE 54
 
 
-BMPReader::BMPImage BMPReader::load(const string& filepath)
+BMPReader::BMPImage BMPReader::loadBMPImage(const std::string& filepath)
 {
     int width, height;
     short bits_per_pixel;
     int compression;
 
-    ifstream file(filepath, ios::binary);
-    if (!file){ throw runtime_error("Ошибка открытия BMP: " + filepath); }
+    std::ifstream file(filepath, std::ios::binary);
+    if (!file){ throw std::runtime_error("Ошибка открытия BMP: " + filepath); }
 
     // Чтение заголовка:
-    array<char, HEADER_SIZE> header;
+    std::array<char, HEADER_SIZE> header;
     if( !file.read(header.data(), header.size()) ){
         throw std::runtime_error("Некорректный BMP заголовок");
     }
@@ -55,7 +55,7 @@ BMPReader::BMPImage BMPReader::load(const string& filepath)
             throw std::runtime_error("Преждевременное окончание BMP");
         }
         uint8_t* dest_row = image.rgb_data.data() + y * width * 3;
-        //BGR->RGB:
+        // BGR->RGB:
         for (int x = 0; x < width; ++x) {
             const char* pixel = row_buffer.data() + x * 3;
             dest_row[x*3 + 0] = static_cast<uint8_t>(pixel[2]); // R
