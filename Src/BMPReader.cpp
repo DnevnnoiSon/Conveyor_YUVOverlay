@@ -6,7 +6,6 @@
 
 #define HEADER_SIZE 54
 
-
 BMPReader::BMPImage BMPReader::loadBMPImage(const std::string& filepath)
 {
     int width, height;

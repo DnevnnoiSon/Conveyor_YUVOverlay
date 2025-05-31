@@ -5,7 +5,9 @@
 #include <cstdint>
 
 #include"BMPReader.h"
-
+//================================//
+//  МОДУЛЬ КОНВЕРТАЦИИ RGB-->YUV  //
+//================================//
 
 class YUVConverter {
 public:
