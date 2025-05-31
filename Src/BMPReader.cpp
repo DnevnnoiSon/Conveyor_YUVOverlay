@@ -2,10 +2,9 @@
 #include <array>
 #include <string.h>
 
-#include "bmpreader.h"
+#include "BMPReader.h"
 
 #define HEADER_SIZE 54
-
 
 
 BMPReader::BMPImage BMPReader::load(const string& filepath)
@@ -15,7 +14,7 @@ BMPReader::BMPImage BMPReader::load(const string& filepath)
     int compression;
 
     ifstream file(filepath, ios::binary);
-    if (!file) throw runtime_error("Ошибка открытия BMP: " + filepath);
+    if (!file){ throw runtime_error("Ошибка открытия BMP: " + filepath); }
 
     // Чтение заголовка:
     array<char, HEADER_SIZE> header;
@@ -39,8 +38,8 @@ BMPReader::BMPImage BMPReader::load(const string& filepath)
     }
 
     // Расчет выравнивания:
-    const int row_size = (width * 3 + 3) & ~3;
-    const int padding = row_size - width * 3;
+    int row_size = (width * 3 + 3) & ~3;
+    //int padding = row_size - width * 3;
 
     // Подготовка изображения:
     BMPImage image;
@@ -48,17 +47,14 @@ BMPReader::BMPImage BMPReader::load(const string& filepath)
     image.height = height;
     image.rgb_data.resize(width * height * 3);
 
-    // Буфер для чтения строки:
     std::vector<char> row_buffer(row_size);
 
     // Чтение данных - [снизу вверх]
     for (int y = height - 1; y >= 0; --y) {
         if (!file.read(row_buffer.data(), row_size)) {
-            throw std::runtime_error("Unexpected end of file");
+            throw std::runtime_error("Преждевременное окончание BMP");
         }
-
         uint8_t* dest_row = image.rgb_data.data() + y * width * 3;
-
         //BGR->RGB:
         for (int x = 0; x < width; ++x) {
             const char* pixel = row_buffer.data() + x * 3;
