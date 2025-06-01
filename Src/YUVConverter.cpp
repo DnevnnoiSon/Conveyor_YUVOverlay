@@ -19,7 +19,6 @@ namespace {
     }
 }
 
-// Оптимальный способ конвертации:
 YUVConverter::YUVImage YUVConverter::BMPConvert(const BMPReader::BMPImage& bmp)
 {
     if (bmp.width % 2 != 0 || bmp.height % 2 != 0) {

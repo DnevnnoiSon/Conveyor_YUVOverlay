@@ -13,13 +13,20 @@
 class BMPReader
 {
 public:
-// Структурв выгруженных BMP данных.
+/**
+* @brief BMPImage - формат BMP */
     struct BMPImage {
         int width = 0;
         int height = 0;
         std::vector<uint8_t> rgb_data;
     };
+ /**
+* @brief Выгрузка изображения: BMP --> YUV
+* @arg string filepath - путь к BMP файлу
+* @return  BMPImage - формат BMP */
     static BMPImage loadBMPImage(const std::string& filepath);
+
+  //  static checkBMPFile
 };
 
 #endif // BMPREADER_H
