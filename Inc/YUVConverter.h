@@ -11,12 +11,20 @@
 
 class YUVConverter {
 public:
-// Структурв сконвертированных YUV данных.
+/**
+* @brief UVImage - формат YUV */
     struct YUVImage {
         int width;
         int height;
         std::vector<uint8_t> YUV; //помещение последовательно: Y-U-V
     };
+/**
+* @brief Конвертация изображения: BMP --> YUV420
+* @arg BMPImage - формат BMP
+* @return YUVImage - формат YUV */
     static YUVImage BMPConvert(const BMPReader::BMPImage& bmp);
+
+// Добавить проверку конвертации: прогнать через тесты.
+// ...
 };
 #endif // YUVCONVERTER_H
