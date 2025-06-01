@@ -5,8 +5,9 @@
 #include <filesystem>
 
 #include <vector>
-#include <set>
 
+#include "YUVConverter.h"
+#include "BMPReader.h"
 
 int main()
 {
@@ -19,15 +20,20 @@ int main()
 
 // Начальное сканирование папки:
     for (const auto& entry : std::filesystem::directory_iterator(path)) {
-        if (entry.path().extension() == ".bmp") {
+        if (entry.path().extension() == ".bmp") {  
             BMPFiles.emplace_back(entry.path().filename());
         }
     }
-    for(const auto &el : BMPFiles){
-        std::cout << el << std::endl;
-    }
 
-    while(1
+//Последовательная конвертация:
+    for(const auto &el : BMPFiles) {
+    /// 1. Выгрузка BMP:
+        BMPReader::BMPImage bmp = BMPReader::loadBMPImage(el);
+    /// 2. Конвертация: BMP --> YUV420
+        YUVConverter::YUVImage yuv = YUVConverter::BMPConvert(bmp);
+    /// 3. Добавление в видео-поток:
+        //YUVOverlay(yuv);
+    }
 
     return 0;
 }
