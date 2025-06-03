@@ -29,16 +29,12 @@
 
 ## 🔧 СБОРКА.
 ```bash
-g++ -std=c++17 -o YUVOverlay \
-    Src/main.cpp \
-    Src/BMPReader.cpp \
-    Src/YUVConverter.cpp \
-    Src/YUVOverlay.cpp
+
 ```
 
 ## 🔧 ЗАПУСК.
 ```bash
-./YUVOverlay
+
 ```
 ---
 
