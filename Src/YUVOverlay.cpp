@@ -15,9 +15,8 @@ YUVOverlay::YUVOverlay(const std::string& outputPath) {
 YUVOverlay::~YUVOverlay() {
     if(outputStream.is_open()) {
         outputStream.close();
-        std::cout << "Было записано: " << YUVframeCounter << std::endl;
+        std::cout << "В видео поток записано: " << YUVframeCounter << " bmp" << std::endl;
     }
-    delete this;
 }
 
 

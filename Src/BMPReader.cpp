@@ -33,7 +33,7 @@ BMPReader::BMPImage BMPReader::loadBMPImage(const std::string& filepath)
     memcpy(&compression, &header[30], sizeof(int));
 
     if (bits_per_pixel != 24 || compression != 0) {
-        throw std::runtime_error("Неккоректная разрядность или формат BMP файла");
+        throw std::runtime_error("Поддерживаются только 24-битные несжатые BMP");
     }
 
     // Расчет выравнивания:

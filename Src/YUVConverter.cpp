@@ -22,7 +22,7 @@ namespace {
 YUVConverter::YUVImage YUVConverter::BMPConvert(const BMPReader::BMPImage& bmp)
 {
     if (bmp.width % 2 != 0 || bmp.height % 2 != 0) {
-        throw std::runtime_error("Ошибка размера изображения");
+        throw std::runtime_error("Ошибка размера изображения[должны быть четными]");
     }
 // Рассчет размеров плоскостей:
     const int uv_width = bmp.width / 2;
