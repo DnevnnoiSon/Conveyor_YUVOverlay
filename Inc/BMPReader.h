@@ -25,8 +25,6 @@ public:
 * @arg string filepath - путь к BMP файлу
 * @return  BMPImage - формат BMP */
     static BMPImage loadBMPImage(const std::string& filepath);
-
-  //  static checkBMPFile
 };
 
 #endif // BMPREADER_H

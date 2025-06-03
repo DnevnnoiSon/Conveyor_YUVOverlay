@@ -24,8 +24,9 @@ set(HEADERS
     Inc/YUVOverlay.h
 )
 
-set(RESOURCES
-    Resources/input.bmp
+# Автоматический сбор файлов из Resources:
+file(GLOB_RECURSE RESOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/Resources/*"
 )
 
 foreach(file ${SOURCES} ${HEADERS})
@@ -45,8 +46,8 @@ target_include_directories(YUVOverlay PRIVATE
 
 # Копирование ресурсов в выходную директорию:
 add_custom_command(TARGET YUVOverlay POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_CURRENT_SOURCE_DIR}/Resources/input.bmp
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/Resources
         $<TARGET_FILE_DIR:YUVOverlay>
     COMMENT "Copying resources to output directory"
 )

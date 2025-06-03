@@ -6,20 +6,23 @@
 
 #include <vector>
 
-#include "YUVConverter.h"
 #include "BMPReader.h"
+#include "YUVConverter.h"
+#include "YUVOverlay.h"
 
 int main()
 {
 //главный поток
     std::cout << "Текущая директория: " << std::filesystem::current_path() << std::endl;
-    std::string path = "../../Resources";
+    const std::string resourcePath = "../../Resources";
+    const std::string videoStreamFile = "vieostream.yuv";
 
+    YUVOverlay *video = new YUVOverlay(videoStreamFile);
 // Вектор для новых файлов:
     std::vector<std::string> BMPFiles;
 
 // Начальное сканирование папки:
-    for (const auto& entry : std::filesystem::directory_iterator(path)) {
+    for (const auto& entry : std::filesystem::directory_iterator(resourcePath)) {
         if (entry.path().extension() == ".bmp") {  
             BMPFiles.emplace_back(entry.path().filename());
         }
@@ -32,9 +35,9 @@ int main()
     /// 2. Конвертация: BMP --> YUV420
         YUVConverter::YUVImage yuv = YUVConverter::BMPConvert(bmp);
     /// 3. Добавление в видео-поток:
-        //YUVOverlay(yuv);
+        video->add_YUVframe(yuv);
     }
-
+    delete video;
     return 0;
 }
 
