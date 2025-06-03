@@ -17,7 +17,7 @@ int main()
     const std::string resourcePath = "../../Resources";
     const std::string videoStreamFile = "vieostream.yuv";
 
-    YUVOverlay *video = new YUVOverlay(videoStreamFile);
+    YUVOverlay video(videoStreamFile);
 // Вектор для новых файлов:
     std::vector<std::string> BMPFiles;
 
@@ -35,9 +35,8 @@ int main()
     /// 2. Конвертация: BMP --> YUV420
         YUVConverter::YUVImage yuv = YUVConverter::BMPConvert(bmp);
     /// 3. Добавление в видео-поток:
-        video->add_YUVframe(yuv);
+        video.add_YUVframe(yuv);
     }
-    delete video;
     return 0;
 }
 
