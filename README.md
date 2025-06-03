@@ -30,10 +30,10 @@
 ## 🔧 СБОРКА.
 ```bash
 g++ -std=c++17 -o VideoOverlay \
-    main.cpp \
-    BMPReader.cpp \
-    YUVConverter.cpp \
-    YUVOverlay.cpp
+    Src/main.cpp \
+    Src/BMPReader.cpp \
+    Src/YUVConverter.cpp \
+    Src/YUVOverlay.cpp
 ```
 
 ## 🔧 ЗАПУСК.
