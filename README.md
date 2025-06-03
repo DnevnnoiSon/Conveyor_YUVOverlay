@@ -29,7 +29,7 @@
 
 ## 🔧 СБОРКА.
 ```bash
-g++ -std=c++17 -o VideoOverlay \
+g++ -std=c++17 -o YUVOverlay \
     Src/main.cpp \
     Src/BMPReader.cpp \
     Src/YUVConverter.cpp \
@@ -38,7 +38,7 @@ g++ -std=c++17 -o VideoOverlay \
 
 ## 🔧 ЗАПУСК.
 ```bash
-./VideoOverlay
+./YUVOverlay
 ```
 ---
 
